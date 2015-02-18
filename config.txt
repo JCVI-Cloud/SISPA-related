@@ -1,0 +1,5 @@
+#### Change these paths to where your executables are stored ####
+raxmlHPC:/usr/local/bin/raxmlHPC
+vcftools:/usr/local/bin/vcftools
+formatdb: /usr/local/bin/formatdb
+blastall:/usr/local/bin/blastall

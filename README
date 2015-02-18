@@ -1,0 +1,40 @@
+SISPA Post-Processing Perl Scripts
+=============================
+
+vcf_snv.pl 
+-----------
+Description:
+
+This script takes a VCF file from kSNP and does the following:
+
+ 1) Filter VCF file to remove recombinant regions
+ 2) Creat a SNV matrix (snv_matrix.txt), only retaining rows that have at least the threshold(ie. 90%) of genomes present
+ 3) Create a SNV Fasta file and Phylip file for each genome (vcf_snv.fasta, vcf_snv.phy)
+ 4) Run raxML 
+
+create_rpkm_matrix.pl
+---------------------
+Description:
+
+This script takes a list of Fasta file reads and runs blastn against a provided antibiotic resistance (abR) gene database. 
+It then generates a matrix of RPKM values for each gene (row) and genome (column).     
+
+Requirements
+=============================
+These scripts require a config file to be passed in. This config files requires the user to list the location of where
+four external 3rd party tools are installed on their machines. The required 3rd party tools are:
+
+raxmlHPC: https://github.com/stamatak/standard-RAxML
+vcftools: http://vcftools.sourceforge.net/
+formatdb*
+blastall*
+
+Note: formatdb and blastall are no longer supported by NCBI as they've switched to BLAST+. create_rpkm_matrix.pl uses the legacy blastall. If you do not have these installed you can ran blast+ on your reads outside of this script and place them in the output directory. They must be in -m8 format. Label the blast files <genome name>.blast and the script will recognize them and will create a RPKM value matrix.
+
+Use the config.txt that was included in this package OR copy the text below to a new text file and change the install
+paths accordingly:
+
+raxmlHPC:/usr/local/bin/raxmlHPC
+vcftools:/usr/local/bin/vcftools
+formatdb: /usr/local/bin/formatdb
+blastall:/usr/local/bin/blastall
